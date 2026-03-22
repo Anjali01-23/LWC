@@ -1,0 +1,22 @@
+<template>
+    <lightning-modal-header label={header}>
+    </lightning-modal-header>
+   
+    <lightning-modal-footer>
+            <div class="slds-grid slds-grid_align-center">
+            <lightning-button
+                label='Cancel'
+                class="slds-button"
+                variant=neutral
+                onclick={closeIt}
+            ></lightning-button>
+
+            <lightning-button
+                label='Proceed'
+                class="slds-button"
+                variant=Brand
+                onclick={forward}
+            ></lightning-button>
+            </div>
+    </lightning-modal-footer>
+</template>

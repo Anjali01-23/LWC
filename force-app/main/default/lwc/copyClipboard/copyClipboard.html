@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Copy to Clipboard Example" icon-name="custom:custom67">
+        <div class="slds-var-m-around_medium">
+            <lightning-input 
+                label="Text to Copy" 
+                value={textToCopy} 
+                onchange={handleChange}>
+            </lightning-input>
+            <lightning-button 
+                label="Copy" 
+                onclick={handleCopy} 
+                class="slds-var-m-top_small">
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

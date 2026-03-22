@@ -1,0 +1,85 @@
+<template>
+    <lightning-button label="Delete Selected" onclick={handleDelete11}></lightning-button>
+    <!-- DataTable -->
+    <lightning-datatable
+                key-field="Id"
+                data={datass}
+                columns={columns}
+                onrowaction={handleRowAction}
+                onrowselection={handleRowSelection}
+                show-row-number-column>
+                
+    </lightning-datatable>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Record form -->
+   <!-- <lightning-record-form
+    object-api-name={objectname}
+    fields={field} record-id={recordId}></lightning-record-form>
+     -->
+
+     <!-- View Form -->
+    <!-- <lightning-record-view-form
+    record-id={recordId}
+    object-api-name={objectname}> -->
+
+    <!-- These are the fields which we want to view. -->
+    <!-- <lightning-output-field field-name="Name"></lightning-output-field>
+    <lightning-output-field field-name="NumberOfEmployees"></lightning-output-field>
+</lightning-record-view-form> -->
+
+
+
+
+ <!-- Edit form -->
+<!-- <lightning-record-edit-form
+    object-api-name="Account"
+    record-id={recordId}>
+
+    <lightning-input-field field-name="Name"></lightning-input-field>
+    <lightning-input-field field-name="NumberOfEmployees"></lightning-input-field>
+
+    <lightning-button type="submit" label="Save kr do"></lightning-button>
+</lightning-record-edit-form> -->
+
+
+
+
+
+
+    <!-- <lightning-input
+        type="text"
+        label="Name"
+        class="slds-m-left_x-small account2">
+    </lightning-input>
+
+    <lightning-button
+        label="Create Record"
+        class="slds-m-left_x-small"
+        onclick={newRecord}>
+    </lightning-button>
+
+    <lightning-button
+        label="Delete Record"
+        class="slds-m-left_x-small"
+        onclick={handleDelete}>
+    </lightning-button>
+
+    <lightning-button
+        label="Update Record"
+        class="slds-m-left_x-small"
+        onclick={handleUpdate}>
+    </lightning-button> -->
+</template>

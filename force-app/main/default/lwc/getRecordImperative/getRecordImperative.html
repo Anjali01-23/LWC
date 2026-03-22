@@ -1,0 +1,18 @@
+<template>
+    <lightning-input type="text" label="Input" class="slds-m-left_x-small accountt" onchange={handle}></lightning-input>
+    <!-- <lightning-button type="text" label="Call Imperative" class="slds-m-left_x-small" onclick={handle}></lightning-button> -->
+    <template for:each={accounts} for:item="record">
+    <p key={record.Id}>{record.Id}-->{record.Name}</p>
+    </template>
+
+    <lightning-input type="text" label="AccountName" class="slds-m-left_x-small account1" ></lightning-input>
+    <lightning-input type="text" label="NumEmp" class="slds-m-left_x-small account2"></lightning-input>
+
+    <lightning-button type="text" label="Create Records" class="slds-m-left_x-small" onclick={createRecords}></lightning-button>
+
+
+    <lightning-button type="text" label="Open Record of Account" class="slds-m-left_x-small" onclick={openRecord}></lightning-button>
+     <lightning-button type="text" label="New Record of Account" class="slds-m-left_x-small" onclick={newRecord}></lightning-button>
+
+
+</template>

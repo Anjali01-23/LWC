@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Order Placement Component">
+    <lightning-input type="text" label="Customer Name" required value={value1} onchange={handleChange1}></lightning-input>
+    <lightning-combobox
+            name="ALL"
+            label="Select Item"
+            placeholder="Select an Option"
+            options={options}
+            value={value2}
+            onchange={handleChange2} required ></lightning-combobox>
+    <lightning-input type="number" label="Quantity" required value={value3} onchange={handleChange3}></lightning-input>
+  <br>
+    <lightning-button label="Place Order"
+          onclick={placeOrder}
+          variant="brand" class="slds-align_absolute-center buttonclass"></lightning-button>
+    </lightning-card>
+</template>

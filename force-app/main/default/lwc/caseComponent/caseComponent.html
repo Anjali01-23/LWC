@@ -1,0 +1,30 @@
+<template>
+    <lightning-datatable
+                key-field="Id"
+                data={datas}
+                columns={columns1}
+                show-row-number-column
+                onrowselection={handleRowSelection}
+                max-row-selection="1">                
+    </lightning-datatable> 
+
+    <br>
+    <br>
+    <p>Summary Section</p>
+    <div>
+        <p>New Cases:{n}</p>
+        <p>Working Cases:{work}</p>
+        <p>Escalated Cases:{esc}</p>
+    </div>
+
+    <br>
+    <br>
+    <p>Summary Section</p>
+    <template for:each={summary} for:item="item1">
+        <p key={item1}>{item1.Status}-->{item1.countt}</p>
+    </template>
+    
+
+    <lightning-button variant="base" label="Refresh Data"  onclick={handleRefresh} class="slds-m-left_x-small a4 slds-p-around_xxx-small"></lightning-button>
+
+</template>

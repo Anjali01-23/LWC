@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Order State Dashboard">
+        <br>
+    <template if:true={flag}>
+    <p>No Order yet!!</p>
+    </template>
+    <br>
+    <template if:true={data}>
+       <div>
+       <br>
+       <p>Order Id-->{data.OrderID}</p>
+       <p>Customer Name-->{data.CustomerName}</p>
+       <p>Quantity-->{data.Quantity}</p>
+       <p>Item-->{data.Item}</p>
+       <p>Status-->{data.Status}</p>
+       </div>
+    </template>
+    </lightning-card>
+</template>

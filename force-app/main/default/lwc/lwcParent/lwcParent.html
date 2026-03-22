@@ -1,0 +1,44 @@
+<template>
+    <p>Hii Parent hu m</p>
+    <lightning-button variant="base" label="Handle"  onclick={handle} class="slds-m-left_x-small"></lightning-button>
+     <!-- <template if:true={flag}>
+    <c-lwc-child></c-lwc-child>
+    </template> -->
+    <!-- <template if:false={flag}>
+    <p>Ham to galat h bhai</p>
+    </template> It is the old way to add if-else-->
+    
+
+    <!-- For each Loop -->
+     <template for:each={array} for:item="item">
+     <p key={item}>{item}</p>
+     </template>
+
+     <template for:each={array2} for:item="item1">
+     <p key={item1.id}>{item1.id}-->{item1.Name}</p>
+     </template>
+
+
+     <!-- If-else by Modern way -->
+    <template lwc:if={flag}>
+    <c-lwc-child></c-lwc-child>
+    </template> 
+     <template lwc:else>
+    <p>Ham to galat h bhai naye way se</p>
+    </template> 
+
+     <!-- Custom id -->
+    <p data-id="name">Ye Custom Id ka Paragraph h</p>
+
+
+    <p>{person1.name}---{person1.id}</p>
+    <lightning-button variant="base" label="HandleTrack"  onclick={changeName} class="slds-m-left_x-small"></lightning-button>
+
+
+    <template for:each={trackArray} for:item="element">
+    <p key={element}>{element}</p>
+    </template>
+    <lightning-button variant="base" label="HandleTrackArray"  onclick={addArray} class="slds-m-left_x-small"></lightning-button>
+
+
+</template>

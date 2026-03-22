@@ -1,0 +1,199 @@
+<template>
+    <lightning-button variant="brand" label="New Contact"  onclick={createNew} class="slds-m-left_x-small a1 slds-p-around_xxx-small"></lightning-button>
+    <lightning-button variant="brand" label="Recent Contacts"  onclick={recent} class="slds-m-left_x-small a1 slds-p-around_xxx-small"></lightning-button>
+
+    <lightning-datatable
+                key-field="Id"
+                data={datas}
+                columns={columns1}
+                show-row-number-column
+                onrowaction={handleRowAction}
+                >                
+    </lightning-datatable>  
+   
+    <template if:true={isModalOpen}>
+     <section class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <header class="slds-modal__header">
+          <h2 class="slds-text-heading_medium">Contact-Details</h2>
+          <button class="slds-modal__close btn" onclick={closeModal} >
+            <lightning-icon
+        icon-name="utility:close"
+        alternative-text="Close"
+        size="small"
+        class="iconC"
+    ></lightning-icon>
+    
+          </button>
+        </header>
+
+        
+        <div class="slds-modal__content slds-p-around_medium">
+        <template if:false={conData.data}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </template>
+        <template if:true={conData.data}>
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-size_1-of-2">
+           <p>Name</p>
+           <p>{name}</p>
+           <br>
+           <p>Email</p>
+           <p>{email}</p>
+          </div>
+          <div class="slds-col slds-size_1-of-2">
+          <p>Lead Source</p>
+          <p>{leadsource}</p>
+          <br>
+          <p>Account Name</p> 
+          <p>{AccountName}</p>
+          </div>
+        </div>
+        </template>
+        </div>
+
+        <footer class="slds-modal__footer">
+        <lightning-button variant="brand" label="Close"  onclick={closeModal} class="slds-m-left_x-small a4 slds-p-around_xxx-small"></lightning-button>
+        </footer>
+      </div>
+     </section>
+     <div class="slds-backdrop slds-backdrop_open">
+      </div>
+    </template>
+
+
+     <template if:true={isEditModal}>
+     <section class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <header class="slds-modal__header">
+          <h2 class="slds-text-heading_medium">Contact-Details</h2>
+          <button class="slds-modal__close btn" onclick={closeModaledit} >
+            <lightning-icon
+        icon-name="utility:close"
+        alternative-text="Close"
+        size="small"
+        class="iconC"
+    ></lightning-icon>
+    
+          </button>
+        </header>
+
+        
+        <div class="slds-modal__content slds-p-around_medium">
+      <lightning-record-edit-form object-api-name="Contact" record-id={recId} onsuccess={savehandle} onerror={errorhandle}>
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-2">
+        <lightning-input-field field-name="Name"></lightning-input-field>
+        <lightning-input-field field-name="Email"></lightning-input-field>
+        <lightning-input-field field-name="Title"></lightning-input-field>
+        <lightning-input-field field-name="Phone"></lightning-input-field>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+        <lightning-input-field field-name="LeadSource"></lightning-input-field>
+        <lightning-input-field field-name="AccountId"></lightning-input-field>
+        <lightning-input-field field-name="BirthDate"></lightning-input-field>
+        <lightning-input-field field-name="Lead"></lightning-input-field>
+        <lightning-input-field field-name="Department"></lightning-input-field>
+        <lightning-input-field field-name="Assistant"></lightning-input-field>
+        <lightning-input-field field-name="Fax"></lightning-input-field>
+        <lightning-input-field field-name="Description"></lightning-input-field>
+        </div>
+      </div>
+        
+      
+        <lightning-button type="submit" label="Save"></lightning-button>
+      </lightning-record-edit-form>
+        </div>
+
+        <footer class="slds-modal__footer">
+        <lightning-button variant="brand" label="Close"  onclick={closeModaledit} class="slds-m-left_x-small a4 slds-p-around_xxx-small"></lightning-button>
+        </footer>
+      </div>
+     </section>
+     <div class="slds-backdrop slds-backdrop_open">
+      </div>
+    </template>
+
+
+
+
+
+    <template if:true={accModal}>
+     <section class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <header class="slds-modal__header">
+          <h2 class="slds-text-heading_medium">Account-Details</h2>
+          <button class="slds-modal__close btn" onclick={closeModalacc} >
+            <lightning-icon
+        icon-name="utility:close"
+        alternative-text="Close"
+        size="small"
+        class="iconC"
+    ></lightning-icon>
+    
+          </button>
+        </header>
+
+        
+        <div class="slds-modal__content slds-p-around_medium">
+        <!-- <template if:false={accountData.data}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </template>
+        <template if:true={accountData.data}>
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-size_1-of-2">
+           <p>Name</p>
+           <p>{nameAcc}</p>
+           <br>
+           <p>Number Of Employees</p>
+           <p>{employee}</p>
+          </div>
+          <div class="slds-col slds-size_1-of-2">
+          <p>Phone</p>
+          <p>{phone}</p>
+          <br>
+          <p>Industry</p> 
+          <p>{industry}</p>
+          </div>
+        </div>
+        </template> -->
+       <lightning-record-view-form 
+    object-api-name="Account"
+    record-id={accountId}>
+
+    <div class="slds-grid slds-wrap">
+
+        <!-- Column 1 -->
+        <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+            <lightning-output-field field-name="Name"></lightning-output-field>
+            <lightning-output-field field-name="NumberOfEmployees"></lightning-output-field>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+            <lightning-output-field field-name="Phone"></lightning-output-field>
+            <lightning-output-field field-name="Industry"></lightning-output-field>
+        </div>
+
+    </div>
+
+
+</lightning-record-view-form>
+
+
+<!-- <lightning-record-form
+    object-api-name="Opportunity"
+    layout-type="Full"
+    mode="edit">
+</lightning-record-form> -->
+        </div>
+
+        <footer class="slds-modal__footer">
+        <lightning-button variant="brand" label="Close"  onclick={closeModalacc} class="slds-m-left_x-small a4 slds-p-around_xxx-small"></lightning-button>
+        </footer>
+      </div>
+     </section>
+     <div class="slds-backdrop slds-backdrop_open">
+      </div>
+    </template>
+</template>

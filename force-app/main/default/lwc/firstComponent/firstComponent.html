@@ -1,0 +1,33 @@
+<template>
+    <!-- <h1 style="color: brown; font-size:xx-large">Hello Guysssss</h1> -->
+    <!-- <input type="text">
+    <p>{message}</p> -->
+    <p>{parentProperty}</p> 
+    <div class="slds-box bodyColor">
+        <c-second-component-child child-from-parent={parentProperty}  onmyevent={GetData}></c-second-component-child>
+        <!-- <c-first-component></c-first-component>  A component inside itself , it will go in the loop --> 
+    <div class="slds-grid slds-wrap">
+    <div class="slds-col slds-size_6-of-12 slds-p-right_medium">
+    <lightning-input type="text" label="FirstName" class="firstname">FirstName</lightning-input>
+    </div>
+    <div class="slds-col slds-size_6-of-12">
+    <lightning-input type="text" label="LastName" class="lastname">LastName</lightning-input>
+    </div>
+    <div class="slds-col slds-size_12-of-12 slds-align_absolute-center">
+    <lightning-button variant="base" label="Show FullName"  onclick={makeFullName} class="slds-m-left_x-small"></lightning-button>
+    </div>
+    <div class="slds-col slds-align_absolute-center">
+    The FullName is =>{fullname}
+    </div>
+   </div>
+    </div>
+    <!-- <lightning-button variant="base" label="Base"  onclick={showMessage} class="slds-m-left_x-small">Click Me to show Message</lightning-button> -->
+</template>
+
+
+<!-- slds-wrap :- To wrap the elements in multiple lines and to put them in next row. -->
+<!-- slds-grid:-To make 12 column grid system.  -->
+<!-- slds-size_6-of-12:-To assign a element some columns out of 12 columns. -->
+<!-- slds-align_absolute-center:-To take the element in center. -->
+
+

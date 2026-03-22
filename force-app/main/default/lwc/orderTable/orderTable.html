@@ -1,0 +1,53 @@
+<template>
+    <lightning-card title="Order Summary">
+    <p>Total Orders:{count}</p>
+    <br>
+    <template if:true={flag}>
+    <p>No recent orders yet!!</p>
+    </template>
+    <br>
+    <table class="slds-table slds-table_bordered slds-table_col-bordered">
+        <thead>
+            <tr>
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        <template for:each={data} for:item="item1">
+            <tr key={item1.OrderID}>
+                <td>
+                    <div>{item1.OrderID}</div>
+                </td>
+                <td>
+                    <div>{item1.CustomerName}</div>
+                </td>
+                <td>
+                    <div>{item1.Item}</div>
+                </td>
+                <td>
+                    <div>{item1.Quantity}</div>
+                </td>
+                <td>
+                    <div>{item1.Status}</div>
+                </td>
+            </tr>
+        </template>
+        </tbody>
+       
+    </table>
+
+    <br>
+    <br>
+    <lightning-datatable
+                key-field="Id"
+                data={datas}
+                columns={columns1}
+                show-row-number-column
+                onrowselection={handleRowSelection}>                
+    </lightning-datatable> 
+    </lightning-card>
+</template>

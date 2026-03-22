@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Case Details">
+        <template for:each={datas} for:item="rec">
+           <lightning-card key={rec.Id}>
+            <p>Case Id-->{rec.Id}</p>
+            <p>Status-->{rec.Status}</p>
+            <p>Priority-->{rec.Priority}</p>
+            <p>Created Date-->{rec.CreatedDate}</p>
+            <p>Subject-->{rec.Subject}</p>
+            <p>Description-->{rec.Description}</p>
+            <br>
+            <br>
+          </lightning-card>
+        </template>
+    </lightning-card>
+</template>

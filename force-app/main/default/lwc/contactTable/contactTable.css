@@ -1,0 +1,8 @@
+.iconC{
+      --slds-c-icon-color-foreground-default: blue;
+}
+
+.btn{
+    border-radius: 50% !important;
+}
+

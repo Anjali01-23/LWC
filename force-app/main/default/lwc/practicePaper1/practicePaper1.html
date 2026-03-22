@@ -1,0 +1,37 @@
+<template>
+<div class="slds-grid slds-grid_align-end">
+<lightning-button label="New" variant="neutral" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+</div>
+
+<div class="slds-grid slds-wrap">
+<div class="slds-col slds-size_1-of-2">
+<lightning-combobox name="ALL" label="Type of Document" placeholder="Select Property" options={options1} value={Typevalue}
+    onchange={handleChange11}></lightning-combobox>
+</div>
+
+<div class="slds-col slds-size_1-of-2">
+<lightning-combobox name="ALL" label="Valid" placeholder="Select Property" options={options2} value={Validvalue}
+    onchange={handleChange22}></lightning-combobox>  
+</div>
+</div>
+
+
+<lightning-accordion allow-multiple-sections-open>
+    <template for:each={yearsView} for:item="perYear">
+        <lightning-accordion-section name={perYear.year} label={perYear.year} key={perYear.year}>
+            <lightning-datatable
+                key-field="Id"
+                data={perYear.records}
+                columns={columns}
+                hide-checkbox-column
+                onrowaction={handleEdit}
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={onHandleSort}>               
+            </lightning-datatable> 
+        </lightning-accordion-section>
+    </template>
+    
+</lightning-accordion>
+</template>

@@ -1,0 +1,36 @@
+<template>
+     <div class="slds-m-bottom_small">
+          <lightning-input type="text"
+             value={searchValue}
+             placeholder="Opportunity Name or Status"
+             onchange={searchKeyword}
+             ></lightning-input>
+       </div>
+       
+       <lightning-button label="Search"
+          onclick={handleSearchKeyword}
+          variant="brand" class="slds-p-right_medium"></lightning-button>
+
+          <lightning-button label="Refresh"
+          onclick={handleRefresh}
+          variant="brand"></lightning-button>
+
+           <lightning-combobox
+            name="ALL"
+            label="Update Status"
+            placeholder="Select Status"
+            options={options}
+            value={value}
+            onchange={handleChange} ></lightning-combobox>
+          <br>
+        <br>
+    <lightning-datatable
+                key-field="id"
+                data={dataOpp}
+                columns={columns}
+                show-row-number-column
+                onrowselection={handleRowSelection}>
+        </lightning-datatable>
+
+       
+</template>

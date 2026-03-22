@@ -1,0 +1,86 @@
+<template >
+    <div onclick = {handleClickOutside}>
+
+
+      <lightning-modal-header label={heading}>
+    </lightning-modal-header>
+    <lightning-modal-body>
+        <div class="slds-form" role="list">
+            <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <lightning-input
+                            onchange={handleChange}
+                            data-id="nameInput"
+                            type="text"
+                            name="name"
+                            label="Name"
+                            value = {Name}
+                            required
+                        ></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <lightning-input
+                            onchange={handleChange}
+                            data-id="amountInput"
+                            type="text"
+                            name="Amount"
+                            label="Amount"
+                            value = {Amount}
+                            required
+                        ></lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="Cancel" title="Non-primary action" onclick={handleButtonCancel} class="slds-m-left_x-small"></lightning-button>
+
+        <lightning-button variant="brand" label="Save" title="Primary action" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>
+
+        
+    </lightning-modal-footer>  
+    </div>
+    <!--lightning-modal-header label={heading}>
+    </lightning-modal-header>
+    <lightning-modal-body>
+        <div class="slds-form" role="list">
+            <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <lightning-input
+                            data-id="nameInput"
+                            type="text"
+                            name="name"
+                            label="Name"
+                            value = {Name}
+                            required
+                        ></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <lightning-input
+                            data-id="amountInput"
+                            type="text"
+                            name="Amount"
+                            label="Amount"
+                            value = {Amount}
+                            required
+                        ></lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="Cancel" title="Non-primary action" onclick={handleButtonCancel} class="slds-m-left_x-small"></lightning-button>
+
+        <lightning-button variant="brand" label="Save" title="Primary action" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>
+
+        
+    </lightning-modal-footer-->
+</template>

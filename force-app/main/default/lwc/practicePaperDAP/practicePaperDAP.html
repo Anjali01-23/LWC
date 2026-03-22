@@ -1,0 +1,178 @@
+  <!-- <template>
+    
+    <lightning-tabset variant="scoped">
+        
+        
+        <lightning-tab label="All Opportunities">
+            <lightning-datatable
+                key-field="Id"
+                data={data1}
+                columns={columns1}
+                onrowselection={handleRowSelection}
+                hide-checkbox-column
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={onHandleSort1}
+                onsave={handleSave}
+                draft-values={draftValues} >              
+    </lightning-datatable> 
+        </lightning-tab>
+        <lightning-tab label="Closed Won">
+            <lightning-datatable
+                key-field="Id"
+                data={data2}
+                columns={columns1}
+                onrowselection={handleRowSelection}
+                hide-checkbox-column
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={onHandleSort2}
+                onsave={handleSave1} 
+                draft-values={draftValues}>        
+    </lightning-datatable> 
+        </lightning-tab>
+        <lightning-tab label="Closed Lost">
+            <lightning-datatable
+                key-field="Id"
+                data={data3}
+                columns={columns1}
+                onrowselection={handleRowSelection}
+                hide-checkbox-column
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={onHandleSort3}
+                onsave={handleSave2}
+                draft-values={draftValues} >      
+    </lightning-datatable> 
+        </lightning-tab>
+        <lightning-tab label="On Hold">
+            <lightning-datatable
+                key-field="Id"
+                data={data4}
+                columns={columns1}
+                onrowselection={handleRowSelection}
+                hide-checkbox-column
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={onHandleSort4}
+                onsave={handleSave3} 
+                draft-values={draftValues}>   
+    </lightning-datatable> 
+        </lightning-tab>
+    </lightning-tabset>
+
+
+     <template if:true={isEditModal}>
+         <lightning-record-form
+    object-api-name={Opportunity}
+    fields={field} mode="edit"></lightning-record-form> -->
+     <!-- <section class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <header class="slds-modal__header">
+          <h2 class="slds-text-heading_medium">Create a Record</h2>
+          <button class="slds-modal__close btn" onclick={closeModaledit} >
+            <lightning-icon
+        icon-name="utility:close"
+        alternative-text="Close"
+        size="small"
+        class="iconC"
+    ></lightning-icon> -->
+    
+          <!-- </button>
+        </header>
+        
+        <div class="slds-modal__content slds-p-around_medium">
+      -->
+      
+      <!-- </div> -->
+        <!-- <lightning-button type="submit" label="Save"></lightning-button>
+        <lightning-button variant="brand" label="Close"  onclick={closeModaledit} class="slds-m-left_x-small a4 slds-p-around_xxx-small"></lightning-button> -->
+        <!-- </div>
+
+        <footer class="slds-modal__footer">
+        </footer>
+      </div>
+     </section> 
+     <div class="slds-backdrop slds-backdrop_open">
+      </div>
+    </template>
+
+</template>   -->
+
+
+<template>
+    <lightning-tabset variant="scoped">
+        <div class="slds-grid slds-grid_align-end">
+        <lightning-button-icon icon-name="utility:refresh" alternative-text="Refresh" class="slds-p-around_xx-small" onclick={refreshTable} variant="neutral"></lightning-button-icon>
+        <lightning-button variant="neutral" label="Add"  onclick={handleModal} class="slds-m-left_x-small a4 slds-p-around_xxx-small"></lightning-button>
+        </div>
+        <template for:each={tabValues} for:item="tab">
+            
+        <lightning-tab label={tab.label} value={tab.value} key={tab.value} onactive={handleTabSelect}>
+            <lightning-datatable
+                key-field="Id"
+                data={data1}
+                columns={columns1}
+                hide-checkbox-column
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={onHandleSort1}
+                onsave={handleSave}
+                draft-values={draftValues} >              
+    </lightning-datatable> 
+        </lightning-tab>
+        </template>
+    </lightning-tabset>
+
+
+
+
+    <template if:true={isEditModal}>
+     <section class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <header class="slds-modal__header">
+          <h2 class="slds-text-heading_medium">Create Record Of Opportunity</h2>
+          <button class="slds-modal__close btn" onclick={closeModaledit} >
+            <lightning-icon
+        icon-name="utility:close"
+        alternative-text="Close"
+        size="small"
+        class="iconC"
+    ></lightning-icon>
+          </button>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium">
+      <lightning-record-edit-form object-api-name="Opportunity" onsuccess={savehandle} onerror={errorhandle}>
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-2">
+        <lightning-input-field field-name="Name"></lightning-input-field>
+        <lightning-input-field field-name="Email__c"></lightning-input-field>
+        <lightning-input-field field-name="LeadSource"></lightning-input-field>
+        <lightning-input-field field-name="TotalOpportunityQuantity"></lightning-input-field>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+        <lightning-input-field field-name="CloseDate"></lightning-input-field>
+        <lightning-input-field field-name="StageName" value={currentVal}></lightning-input-field>
+        <lightning-input-field field-name="Type"></lightning-input-field>
+        </div>
+      </div>   
+        <lightning-button type="submit" label="Save"></lightning-button>
+        <lightning-button variant="brand" label="Close"  onclick={closeModaledit} class="slds-m-left_x-small a4 slds-p-around_xxx-small"></lightning-button>
+      </lightning-record-edit-form>
+        </div>
+
+        <footer class="slds-modal__footer">
+        </footer>
+      </div>
+     </section>
+     <div class="slds-backdrop slds-backdrop_open">
+      </div>
+    </template>
+
+
+</template>

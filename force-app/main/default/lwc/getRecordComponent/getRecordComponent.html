@@ -1,0 +1,7 @@
+<template>
+    <template for:each={recordData.data} for:item="record">
+    <p key={record.Id}>{record.Id}-->{record.Industry}</p>
+    </template>
+    <lightning-button type="text" label="Change Industry" class="slds-m-left_x-small" onclick={changeIndustry}></lightning-button>
+
+</template>

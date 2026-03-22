@@ -1,0 +1,27 @@
+<template>
+    <lightning-modal-header label={header}>
+    </lightning-modal-header>
+    <lightning-modal-body>
+        <div class="slds-grid slds-grid_align-center">
+            <p>Are you sure you want to delete this contact?</p>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <div>
+            <lightning-button
+                label='Yes'
+                class="slds-button"
+                variant='brand'
+                onclick={handleProceed}
+                size="large"
+            ></lightning-button>
+            <lightning-button
+                label='No'
+                class="slds-button"
+                variant='brand'
+                onclick={handleClose}
+                size="large"
+            ></lightning-button>
+            </div>
+    </lightning-modal-footer>
+</template>
