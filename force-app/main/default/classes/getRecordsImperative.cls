@@ -182,4 +182,45 @@ public with sharing class getRecordsImperative {
     
 
 
+    @AuraEnabled
+public static List<Opportunity> getFilteredOpp(Date startDate, Date endDate){
+
+    // 🔥 no filter → all data
+    if(startDate == null && endDate == null){
+        return [
+            SELECT Id, Name, CloseDate, StageName 
+            FROM Opportunity
+        ];
+    }
+
+    // 🔥 only start date
+    else if(startDate != null && endDate == null){
+        return [
+            SELECT Id, Name, CloseDate, StageName 
+            FROM Opportunity
+            WHERE CloseDate >= :startDate
+        ];
+    }
+
+    // 🔥 only end date
+    else if(startDate == null && endDate != null){
+        return [
+            SELECT Id, Name, CloseDate, StageName 
+            FROM Opportunity
+            WHERE CloseDate <= :endDate
+        ];
+    }
+
+    // 🔥 both dates
+    else{
+        return [
+            SELECT Id, Name, CloseDate, StageName 
+            FROM Opportunity
+            WHERE CloseDate >= :startDate 
+            AND CloseDate <= :endDate
+        ];
+    }
+}
+
+
 }

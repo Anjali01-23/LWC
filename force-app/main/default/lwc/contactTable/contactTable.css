@@ -6,3 +6,8 @@
     border-radius: 50% !important;
 }
 
+ .custom-column-style {
+    background-color: #f0f8ff !important;
+    border: 1px solid #0070d2 !important;
+    font-weight: bold;
+}

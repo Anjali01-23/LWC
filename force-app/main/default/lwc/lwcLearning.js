@@ -322,3 +322,399 @@
 //         }
 //     }
 // }
+
+
+// Great 👍 ye bhi ek very common + important LWC topic hai 💯
+// 👉 Static Resource se image use karna simple hai but 2–3 steps follow karne padte hain
+
+// 🔥 🎯 STEP 1: Static Resource upload karo
+
+// 👉 Setup → Static Resources
+
+// 👉 Click: New
+
+// Name: myImages
+// Upload: zip file ya single image (logo.png, icon.png etc.)
+
+// 👉 Save
+
+// 🔥 🎯 STEP 2: LWC me import karo
+// import myImages from '@salesforce/resourceUrl/myImages';
+// 🔥 🎯 STEP 3: Use in HTML
+// ✅ Case 1: Single image (direct upload)
+
+// 👉 agar tumne direct image upload ki hai:
+
+// <img src={myImages} alt="logo" />
+// ✅ Case 2: Zip folder me image hai (MOST COMMON 🔥)
+
+// 👉 suppose zip me structure:
+
+// myImages.zip
+//    └── images
+//          └── logo.png
+
+// 👉 JS:
+
+// logoUrl = myImages + '/images/logo.png';
+
+// 👉 HTML:
+
+// <img src={logoUrl} alt="logo" />
+// 🔥 🎯 STEP 4: Dynamic use
+// this.imageUrl = myImages + '/icons/edit.png';
+// <img src={imageUrl} />
+// 🔥 🎯 Full Example
+// JS
+// import { LightningElement } from 'lwc';
+// import myImages from '@salesforce/resourceUrl/myImages';
+
+// export default class Example extends LightningElement {
+//     logo = myImages + '/images/logo.png';
+// }
+// HTML
+// <template>
+//     <img src={logo} alt="Logo" width="100"/>
+// </template>
+// 🔥 🎯 CSS me use
+// .myClass {
+//     background-image: url('/resource/myImages/images/logo.png');
+// }
+
+// 👉 ⚠️ CSS me direct path use hota hai
+
+// ⚠️ IMPORTANT RULES
+// ❌ Common mistakes
+
+// ❌ wrong path
+// ❌ zip ke andar folder bhool jana
+// ❌ case sensitivity ignore karna
+
+// ✅ Best practice
+
+// 👉 always:
+
+// import myRes from '@salesforce/resourceUrl/myImages';
+// 🎯 Where you can use images
+// Use case	Example
+// Logo	header
+// Icons	buttons
+// Background	CSS
+// Datatable	custom type
+// 🧠 Interview line
+
+// Static resources are used in LWC to store images, CSS, or JS files and are accessed using the @salesforce/resourceUrl import.
+
+// 🚀 Pro Tip
+
+// 👉 agar tum:
+
+// custom icons
+// branding
+// UI enhancement
+
+// kar rahi ho 👉 static resource must use
+
+
+
+
+
+// SOLUTION = Custom Datatable
+
+// 👉 iske liye 2 components banenge:
+
+// 🧩 STEP 1: NEW COMPONENT banao
+
+// 👉 naam rakho:
+
+// customDatatable
+// 🔹 customDatatable.js
+// import LightningDatatable from 'lightning/datatable';
+// import imageTemplate from './imageTemplate.html';
+
+// export default class CustomDatatable extends LightningDatatable {
+
+//     static customTypes = {
+//         image: {
+//             template: imageTemplate,
+//             standardCellLayout: true,
+//             typeAttributes: ['src', 'alt']
+//         }
+//     };
+// }
+// 🧩 STEP 2: SAME COMPONENT me template banao
+
+// 👉 file:
+
+// imageTemplate.html
+// <template>
+//     <img 
+//         src={typeAttributes.src} 
+//         alt={typeAttributes.alt}
+//         style="width:40px; height:40px; border-radius:50%;" />
+// </template>
+// 🧠 IMPORTANT
+
+// 👉 yaha:
+
+// typeAttributes.src → image ka URL
+// typeAttributes.alt → alt text
+// 🧩 STEP 3: Ab apne MAIN component me aao
+
+// 👉 jo tumhara existing hai (ContactTable)
+
+// 🔹 HTML change karo
+// <!-- ❌ OLD -->
+// <lightning-datatable ...>
+
+// <!-- ✅ NEW -->
+// <c-custom-datatable
+//     key-field="Id"
+//     data={datas}
+//     columns={columns1}
+//     onrowaction={handleRowAction}>
+// </c-custom-datatable>
+// 🧩 STEP 4: Columns update karo
+// columns1 = [
+//     {
+//         label: 'Image',
+//         fieldName: 'imageUrl',
+//         type: 'image',
+//         typeAttributes: {
+//             src: { fieldName: 'imageUrl' },
+//             alt: 'Profile'
+//         }
+//     },
+//     { label: 'Name', fieldName: 'Name' },
+//     { label: 'Email', fieldName: 'Email' }
+// ];
+// 🧩 STEP 5: Data me image add karo
+
+// 👉 tum already map kar rahi ho — wahi add karo:
+
+// import myImages from '@salesforce/resourceUrl/myImages';
+
+// this.datas = result.data.map((rec) => {
+//     return {
+//         ...rec,
+//         imageUrl: myImages + '/images/user.png'
+//     };
+// });
+// 🎯 FINAL FLOW (clear samajh lo)
+// ContactTable (LightningElement)
+//         ↓
+// c-custom-datatable (LightningDatatable)
+//         ↓
+// imageTemplate.html (render image)
+// 🔥 🔁 Summary in 5 lines
+// new component → customDatatable
+// usme extends LightningDatatable
+// custom type define (image)
+// parent me <c-custom-datatable> use karo
+// data me image URL bhejo
+// ⚠️ MOST COMMON MISTAKES
+
+// ❌ lightning-datatable replace karna bhool jana
+// ❌ typeAttributes galat likhna
+// ❌ image path galat
+
+
+
+
+// Perfect 🔥 ab tum custom datatype ka core engine samajhne wali ho — ye sabse important part hai 💯
+
+// 🔥 🎯 PART 1: Custom Datatype me kaun-kaun si keys hoti hain?
+
+// 👉 jab tum likhti ho:
+
+// static customTypes = {
+//     picklist: {
+//         template: picklistTemplate,
+//         standardCellLayout: true,
+//         typeAttributes: ['options', 'value', 'context']
+//     }
+// }
+
+// 👉 is object me ye keys hoti hain 👇
+
+// ✅ 1. template (MANDATORY 🔥)
+// template: picklistTemplate
+
+// 👉 kaam:
+
+// kaunsa HTML render hoga
+
+// 👉 matlab:
+
+// “cell ka UI kya hoga?”
+
+// ✅ 2. typeAttributes (VERY IMPORTANT 🔥)
+// typeAttributes: ['options', 'value', 'context']
+
+// 👉 kaam:
+
+// kaun-kaun si values template tak bhejni hain
+
+// 👉 ye hi bridge hai:
+
+// column → template
+// 🔥 Example flow
+// typeAttributes: {
+//     options: { fieldName: 'picklistOptions' },
+//     value: { fieldName: 'LeadSource' },
+//     context: { fieldName: 'Id' }
+// }
+
+// 👉 template me:
+
+// typeAttributes.options
+// typeAttributes.value
+// typeAttributes.context
+// ✅ 3. standardCellLayout
+// standardCellLayout: true
+
+// 👉 kaam:
+
+// default datatable styling use kare
+
+// 👉 agar false:
+
+// pura custom layout banana padega
+// 🔥 🎯 PART 2: aur koi keys hoti hain?
+
+// 👉 mostly ye hi use hoti hain:
+
+// Key	Use
+// template	UI
+// typeAttributes	data pass
+// standardCellLayout	layout
+
+// 👉 rarely:
+
+// editTemplate   // advanced inline edit
+// 🔥 🎯 PART 3: handlePicklistChange zaroori hai kya?
+
+// 👉 🔥 IMPORTANT ANSWER:
+
+// ❌ Mandatory nahi hai
+// ✅ BUT practically required hai
+// 🧠 WHY?
+
+// 👉 lightning-datatable:
+
+// standard inline edit → khud handle karta hai
+// custom datatype → ❌ khud kuch nahi karta
+// 👉 tumhara combobox:
+// <lightning-combobox onchange={handleChange}>
+
+// 👉 user select karega → but:
+
+// ❌ datatable ko pata nahi chalega
+// ❌ record update nahi hoga
+
+// 🔥 🎯 isliye handleChange zaroori hai
+// handlePicklistChange(event) {
+//     const recordId = event.target.dataset.id;
+//     const value = event.detail.value;
+
+//     // 👉 yaha tumhe update karna padega
+// }
+// 🔥 🎯 tum kya kar sakti ho yaha?
+// ✅ Option 1: UI update
+// this.datas = this.datas.map(rec => {
+//     if (rec.Id === recordId) {
+//         return { ...rec, LeadSource: value };
+//     }
+//     return rec;
+// });
+// ✅ Option 2: Apex call
+// updateRecord(...)
+// ❌ Agar handle nahi karogi
+
+// 👉 result:
+
+// dropdown change hoga
+// but data save nahi hoga ❌
+// 🔥 🎯 FINAL SUMMARY
+// Custom datatype keys
+// Key	Role
+// template	UI define
+// typeAttributes	data pass
+// standardCellLayout	layout
+// handlePicklistChange
+// Question	Answer
+// mandatory?	❌
+// needed?	✅ (real app me)
+// kaam kya?	value capture + update
+
+
+
+
+
+/*<template>
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        
+        <!-- 🔹 Header -->
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Lead Source</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+
+        <!-- 🔹 Body -->
+        <tbody>
+            <template for:each={data1} for:item="rec">
+                <tr key={rec.Id}>
+                    
+                    <!-- Name -->
+                    <td>{rec.Name}</td>
+
+                    <!-- 🔥 Picklist -->
+                    <td>
+                        <lightning-combobox
+                            value={rec.LeadSource}
+                            options={picklistOptions}
+                            data-id={rec.Id}
+                            onchange={handlePicklistChange}>
+                        </lightning-combobox>
+                    </td>
+
+                    <!-- 🔥 Image -->
+                    <td>
+                        <img src={rec.statusImage}
+                             style="width:40px;height:40px;border-radius:50%;" />
+                    </td>
+
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>
+
+import { LightningElement, track } from 'lwc';
+
+export default class CustomTable extends LightningElement {
+
+    @track data1 = [];
+
+    picklistOptions = [
+        { label: 'Web', value: 'Web' },
+        { label: 'Phone Inquiry', value: 'Phone Inquiry' },
+        { label: 'Partner Referral', value: 'Partner Referral' }
+    ];
+
+    handlePicklistChange(event) {
+        const recordId = event.target.dataset.id;
+        const value = event.detail.value;
+
+        // 🔥 UI update instantly
+        this.data1 = this.data1.map(rec => {
+            if (rec.Id === recordId) {
+                return { ...rec, LeadSource: value };
+            }
+            return rec;
+        });
+    }
+}*/

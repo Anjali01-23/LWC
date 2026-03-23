@@ -15,6 +15,9 @@ import EMPLOYEES from "@salesforce/schema/Account.NumberOfEmployees";
 import PHONE from "@salesforce/schema/Account.Phone";
 import INDUSTRY from "@salesforce/schema/Account.Industry";
 
+import myImages from '@salesforce/resourceUrl/imageCustom';
+
+
 const fields = [NAME_FIELD, EMAIL_FIELD, LEADSOURCE_FIELD, ACCOUNT_NAME];
 
 const fields1 = [NAME_FIELD1, EMPLOYEES, PHONE, INDUSTRY];
@@ -30,8 +33,22 @@ export default class ContactTable extends NavigationMixin(LightningElement) {
   isEditModal;
   accModal;
   columns1 = [
-    { label: "Name", fieldName: "Name" },
-    { label: "Email", fieldName: "Email" },
+    { label: "Name", fieldName: "Name",
+       
+        cellAttributes: {
+    class: 'slds-text-heading_large',
+  }
+     },
+    { label: "Email", 
+      fieldName: "Email" ,
+  //      cellAttributes: {
+  //       class: { fieldName: 'myDynamicClass' } // Data se class uthayega
+  //  }
+
+  cellAttributes: {
+    style: { fieldName: 'myStyle' }
+  }
+    },
     {
       label: "Account Name",
       type: "button",
@@ -45,6 +62,12 @@ export default class ContactTable extends NavigationMixin(LightningElement) {
       }
     },
     { label: "Lead Source", fieldName: "LeadSource" },
+    {label:'Image', 
+            type:'image',
+            typeAttributes: { 
+            url: { fieldName: 'statusImage' } 
+    } 
+         },
     {
       type: "action",
       typeAttributes: { rowActions: actions }
@@ -53,13 +76,18 @@ export default class ContactTable extends NavigationMixin(LightningElement) {
 
   @wire(fetchData)
   contactRec(result) {
+    let custom='custom-column-style';
     this.wholeData = result;
     if (result.data) {
       this.datas = result.data.map((rec) => {
         return {
           ...rec,
           AccountName: rec.Account ? rec.Account.Name : "",
-          accId: rec.Account ? rec.Account.Id : ""
+          accId: rec.Account ? rec.Account.Id : "",
+         myStyle: rec.Email 
+      ? 'background-color:#f0f8ff; color:red; font-size:50px;' 
+      : '',
+      statusImage:rec.Email?myImages+'/imageCustom/successs.jpeg': myImages+'/imageCustom/failed.jpeg'
         };
       });
     }

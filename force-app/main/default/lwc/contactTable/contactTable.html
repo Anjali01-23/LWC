@@ -2,14 +2,14 @@
     <lightning-button variant="brand" label="New Contact"  onclick={createNew} class="slds-m-left_x-small a1 slds-p-around_xxx-small"></lightning-button>
     <lightning-button variant="brand" label="Recent Contacts"  onclick={recent} class="slds-m-left_x-small a1 slds-p-around_xxx-small"></lightning-button>
 
-    <lightning-datatable
+    <c-custom-datatable
                 key-field="Id"
                 data={datas}
                 columns={columns1}
                 show-row-number-column
                 onrowaction={handleRowAction}
                 >                
-    </lightning-datatable>  
+    </c-custom-datatable>  
    
     <template if:true={isModalOpen}>
      <section class="slds-modal slds-fade-in-open">

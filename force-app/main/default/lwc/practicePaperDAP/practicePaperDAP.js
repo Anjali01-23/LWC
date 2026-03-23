@@ -69,7 +69,8 @@ export default class PracticePaperDAP extends LightningElement {
             return {
               ...rec,
               opportunityLink: "/" + rec.Id,
-              AccountName: rec.Account ? rec.Account.Name : ""
+              AccountName: rec.Account ? rec.Account.Name : "",
+              picklistVal:this.picklistOptions
             };
           });
           console.log("Data---> " + this.data1);
@@ -84,13 +85,26 @@ export default class PracticePaperDAP extends LightningElement {
   //   this.activetabContent = event.target.value;
   //}
 
+
+  picklistOptions = [
+    { label: 'Web', value: 'Web' },
+    { label: 'Phone Inquiry', value: 'Phone Inquiry' },
+    { label: 'Partner Referral', value: 'Partner Referral' }
+];
+
   columns1 = [
     { label: "Date", fieldName: "CreatedDate", sortable: true, editable: true },
     {
       label: "Referral Source",
       fieldName: "LeadSource",
+      type:'picklist',
       sortable: true,
-      editable: true
+      editable: true,
+      typeAttributes:{
+        options:{fieldName:'picklistVal'},
+        value: { fieldName: 'LeadSource' },
+        context: { fieldName: 'Id' }
+      }
     },
     { label: "Type", fieldName: "Type", sortable: true, editable: true },
     { label: "Account Name", fieldName: "AccountName", editable: true },
@@ -218,6 +232,18 @@ export default class PracticePaperDAP extends LightningElement {
     });
     this.dispatchEvent(event);
   }
+
+//   handlePicklistChange(event){
+//     const { recordId, value } = event.detail;
+//     console.log('Hiii');
+//     // 🔥 UI turant update
+//     this.data1 = this.data1.map(rec => {
+//         if (rec.Id === recordId) {
+//             return { ...rec, LeadSource: value };
+//         }
+//         return rec;
+//     });
+// }
 }
 
 

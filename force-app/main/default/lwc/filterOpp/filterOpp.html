@@ -1,0 +1,19 @@
+<template>
+    <lightning-input 
+    type="date" 
+    label="Start Date" 
+    onchange={handleStart}>
+</lightning-input>
+
+<lightning-input 
+    type="date" 
+    label="End Date" 
+    onchange={handleEnd}>
+</lightning-input>
+
+<lightning-datatable
+    key-field="Id"
+    data={filteredData}
+    columns={columns}>
+</lightning-datatable>
+</template>

@@ -113,7 +113,7 @@
         <template for:each={tabValues} for:item="tab">
             
         <lightning-tab label={tab.label} value={tab.value} key={tab.value} onactive={handleTabSelect}>
-            <lightning-datatable
+            <c-custom-datatable
                 key-field="Id"
                 data={data1}
                 columns={columns1}
@@ -123,8 +123,9 @@
                 sorted-by={sortedBy}
                 onsort={onHandleSort1}
                 onsave={handleSave}
-                draft-values={draftValues} >              
-    </lightning-datatable> 
+                draft-values={draftValues}></c-custom-datatable>
+                <!-- onpicklistchange={handlePicklistChange}               
+    </c-custom-datatable>  -->
         </lightning-tab>
         </template>
     </lightning-tabset>
